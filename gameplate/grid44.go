@@ -71,7 +71,7 @@ func (g *Grid44) Clone() Gameplate {
 // Move 移动
 func (g *Grid44) Move(d Direction) bool {
 	data := &g.Data
-	tmpGp := g.Clone()
+	// tmpGp := g.Clone()
 	switch d {
 	case UP:
 		for y := 0; y < 4; y++ {
@@ -146,7 +146,7 @@ func (g *Grid44) Move(d Direction) bool {
 			}
 		}
 	}
-	return g.diff((*Grid44)tmpGp)
+	return true
 }
 
 // Rules 获取玩法 规则
