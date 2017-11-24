@@ -60,8 +60,8 @@ var _ Gameplate = (*Grid44)(nil)
 func (g *Grid44) Clone() Gameplate {
 	var cloneGp = &Grid44{}
 	cloneGp.TurnNumber = g.TurnNumber
-	for i := 1; i < 4; i++ {
-		for j := 1; j < 4; j++ {
+	for i := 0; i < 4; i++ {
+		for j := 0; j < 4; j++ {
 			cloneGp.Data[i][j] = g.Data[i][j]
 		}
 	}
@@ -71,7 +71,11 @@ func (g *Grid44) Clone() Gameplate {
 // Move 移动
 func (g *Grid44) Move(d Direction) bool {
 	data := &g.Data
-	// tmpGp := g.Clone()
+	var tmpGrid *Grid44
+	var ok bool
+	if tmpGrid, ok = g.Clone().(*Grid44); !ok {
+		panic("Not support game mode!")
+	}
 	switch d {
 	case UP:
 		for y := 0; y < 4; y++ {
@@ -146,7 +150,11 @@ func (g *Grid44) Move(d Direction) bool {
 			}
 		}
 	}
-	return true
+	if g.diff(tmpGrid) {
+		g.TurnNumber++
+		return true
+	}
+	return false
 }
 
 // Rules 获取玩法 规则

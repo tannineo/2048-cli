@@ -64,8 +64,13 @@ func main() {
 		default:
 			if inGame {
 				if v, ok := gp.AvailableMoves()[inputRunes[0]]; ok {
-					gp.Move(v)
+					if gp.Move(v) {
+						gp.GenerateNewCells()
+					}
 					fmt.Println(gp.Print())
+					if gp.IsGameOver() {
+						fmt.Println("~ Game Over ~")
+					}
 				} else {
 					// invalid input
 					fmt.Println("Invalid input.")
