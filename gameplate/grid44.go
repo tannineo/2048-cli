@@ -198,9 +198,32 @@ func (g *Grid44) Print() string {
 
 // IsGameOver 是否结束
 // true - 结束了 动弹不得
-// false - 没解说 我还能抢救一下
+// false - 没结束 我还能抢救一下
 func (g *Grid44) IsGameOver() bool {
-	return false
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if g.Data[i][j] == 0 {
+				return false
+			}
+			// 上面有没有?
+			if i-1 >= 0 && g.Data[i-1][j] == g.Data[i][j] {
+				return false
+			}
+			// 下面有没有?
+			if i+1 < 4 && g.Data[i+1][j] == g.Data[i][j] {
+				return false
+			}
+			// 左面有没有?
+			if j-1 >= 0 && g.Data[i][j-1] == g.Data[i][j] {
+				return false
+			}
+			// 右面有没有?
+			if j+1 < 4 && g.Data[i][j+1] == g.Data[i][j] {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 // GenerateNewCells 生成新的格子

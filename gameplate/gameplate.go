@@ -25,7 +25,7 @@ type Gameplate interface {
 
 	// IsGameOver 是否结束
 	// true - 结束了 动弹不得
-	// false - 没解说 我还能抢救一下
+	// false - 没结束 我还能抢救一下
 	IsGameOver() bool
 
 	// GenerateNewCells 生成新的格子
