@@ -240,6 +240,8 @@ func (g *Grid44) GenerateNewCells() int {
 	availableGrids := []*int{}
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 3; j++ {
+	for i := 0; i < 4; i++ {
+		for j := 0; j < 4; j++ {
 			if g.Data[i][j] == 0 {
 				availableGrids = append(availableGrids, &g.Data[i][j])
 			}
