@@ -35,7 +35,7 @@ func main() {
 		var inputCmd string
 		if _, err := fmt.Scanln(&inputCmd); err != nil {
 			fmt.Println(err)
-			return
+			continue
 		}
 		inputRunes := []rune(inputCmd)
 		switch inputRunes[0] {
