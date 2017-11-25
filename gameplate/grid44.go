@@ -208,8 +208,8 @@ func (g *Grid44) Print() string {
 // true - 结束了 动弹不得
 // false - 没结束 我还能抢救一下
 func (g *Grid44) IsGameOver() bool {
-	for i := 0; i < 3; i++ {
-		for j := 0; j < 3; j++ {
+	for i := 0; i < 4; i++ {
+		for j := 0; j < 4; j++ {
 			if g.Data[i][j] == 0 {
 				return false
 			}
@@ -237,9 +237,8 @@ func (g *Grid44) IsGameOver() bool {
 // GenerateNewCells 生成新的格子
 // 返回生成格子的数量
 func (g *Grid44) GenerateNewCells() int {
+
 	availableGrids := []*int{}
-	for i := 0; i < 3; i++ {
-		for j := 0; j < 3; j++ {
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 4; j++ {
 			if g.Data[i][j] == 0 {
@@ -248,11 +247,23 @@ func (g *Grid44) GenerateNewCells() int {
 		}
 	}
 
+	if len(availableGrids) == 0 { // 没有空位了
+		return 0
+	}
+
 	// 为了真随机...
 	var v, per *big.Int
 	var err error
 	bond := &big.Int{}
 	bond.SetUint64(uint64(len(availableGrids)))
+
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err) // 这里的err其实就是panic传入的内容，55
+		}
+		fmt.Println("len(availableGrids) = ", len(availableGrids))
+	}()
+
 	v, err = crand.Int(crand.Reader, bond)
 	if err != nil {
 		panic(err)
